@@ -8,6 +8,7 @@ export async function inferenceSqueezenet(path: string): Promise<[any,number]> {
   const imageTensor = await getImageTensorFromPath(path);
   // 2. Run model
   const [predictions, inferenceTime] = await runSqueezenetModel(imageTensor);
+  console.log('predictions', predictions);
   // 3. Return predictions and the amount of time it took to inference.
   return [predictions, inferenceTime];
 }

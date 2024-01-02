@@ -15,7 +15,7 @@ async function loadImageFromPath(path: string, width: number = 224, height: numb
   var imageData = await Jimp.default.read(path).then((imageBuffer: Jimp) => {
     return imageBuffer.resize(width, height);
   });
-
+  
   return imageData;
 }
 
@@ -25,6 +25,7 @@ function imageDataToTensor(image: Jimp, dims: number[]): Tensor {
   const [redArray, greenArray, blueArray] = new Array(new Array<number>(), new Array<number>(), new Array<number>());
 
   // 2. Loop through the image buffer and extract the R, G, and B channels
+  console.log(imageBufferData.length)
   for (let i = 0; i < imageBufferData.length; i += 4) {
     redArray.push(imageBufferData[i]);
     greenArray.push(imageBufferData[i + 1]);
@@ -34,7 +35,7 @@ function imageDataToTensor(image: Jimp, dims: number[]): Tensor {
 
   // 3. Concatenate RGB to transpose [224, 224, 3] -> [3, 224, 224] to a number array
   const transposedData = redArray.concat(greenArray).concat(blueArray);
-
+  console.log("transposedData",transposedData.length)
   // 4. convert to float32
   let i, l = transposedData.length; // length, we need this for the loop
   // create the Float32Array size 3 * 224 * 224 for these dimensions output

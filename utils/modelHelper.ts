@@ -9,7 +9,6 @@ export async function runSqueezenetModel(preprocessedData: any): Promise<[any, n
   const session = await ort.InferenceSession
                           .create('./_next/static/chunks/pages/squeezenet1_1.onnx', 
                           { executionProviders: ['webgl'], graphOptimizationLevel: 'all' });
-  console.log('Inference session created')
   // Run inference and get results.
   var [results, inferenceTime] =  await runInference(session, preprocessedData);
   return [results, inferenceTime];
@@ -35,7 +34,6 @@ async function runInference(session: ort.InferenceSession, preprocessedData: any
   
   //Get the top 5 results.
   var results = imagenetClassesTopK(outputSoftmax, 5);
-  console.log('results: ', results);
   return [results, inferenceTime];
 }
 

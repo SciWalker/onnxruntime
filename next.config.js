@@ -4,6 +4,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   reactStrictMode: true,
+  basePath: '/tech/app/object_detection_v2',
   //distDir: 'build',
   webpack: (config, {  }) => {
 
